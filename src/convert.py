@@ -1,4 +1,5 @@
-from textnode import TextNode, TextType
+from textnode import TextNode, TextType, text_node_to_html_node
+from block import block_to_block_type, BlockType
 from htmlnode import HTMLNode, LeafNode, ParentNode
 import re
 
@@ -83,3 +84,12 @@ def text_to_textnodes(text):
     nodes = split_nodes_delimiter(nodes, "**", TextType.BOLD)
     nodes = split_nodes_delimiter(nodes, "_", TextType.ITALIC)
     return nodes
+
+def markdown_to_blocks(markdown):
+    blocks = markdown.split("\n\n")
+    result = []
+    for block in blocks:
+        block = block.strip()
+        if block != "":
+            result.append(block)
+    return result
