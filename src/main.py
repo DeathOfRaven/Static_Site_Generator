@@ -1,13 +1,18 @@
 from copystatic import recursive_copy
-import os
-import shutil
+import os, shutil, sys
+
 from  gencontent import generate_pages_recursive
 
 def main():
-    if os.path.exists("./public"):
-        shutil.rmtree("./public")
-    recursive_copy("./static", "./public")
+    if len(sys.argv) > 1:
+        basepath = sys.argv[1]
+    else:
+        basepath = "/"
 
-    generate_pages_recursive("content", "template.html", "public")
+    if os.path.exists("./docs"):
+        shutil.rmtree("./docs")
+    recursive_copy("./static", "./docs")
+
+    generate_pages_recursive("content", "template.html", "docs", basepath)
 
 main()
