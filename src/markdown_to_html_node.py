@@ -8,7 +8,7 @@ def text_to_children(text):
     nodes = text_to_textnodes(text)
     result = []
     for node in nodes:
-        result.append(node.text_to_textnodes(node))
+        result.append(text_node_to_html_node(node))
     return result
 
 def text_cleaner(text, type):
